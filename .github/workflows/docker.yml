@@ -17,9 +17,9 @@ jobs:
       - name: Create rclone config file
         run: |
           mkdir -p ~/.config/rclone
-          echo "${{ secrets.RCLONE_CONFIG }}" > ~/.config/rclone/rclone.conf
+          echo "${{ secrets.RCLONE_CONFIG }}" | base64 -d > ~/.config/rclone/rclone.conf
           chmod 600 ~/.config/rclone/rclone.conf
-          echo "Rclone config file created"
+          echo "Rclone config file created and decoded from base64"
       
       - name: Run MongoDB backup with rclone
         run: |
