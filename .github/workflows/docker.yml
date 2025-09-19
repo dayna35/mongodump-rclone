@@ -23,7 +23,7 @@ jobs:
       
       - name: Run MongoDB backup with rclone
         run: |
-          docker run --rm \
+          docker run --rm -q \
             -v ~/.config/rclone/rclone.conf:/config/rclone/rclone.conf:ro \
             -e MONGO_URI="${{ secrets.MONGO_URI }}" \
             -e FILENAME="${{ secrets.FILENAME }}" \
