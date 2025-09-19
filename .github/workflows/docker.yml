@@ -15,9 +15,11 @@ jobs:
         uses: actions/checkout@v4
       
       - name: Run MongoDB backup with rclone
+        env:
+          RCLONE_CONFIG: ${{ secrets.RCLONE_CONFIG }}
         run: |
           docker run --rm \
-            -e RCLONE_CONFIG="${{ secrets.RCLONE_CONFIG }}"
+            -e RCLONE_CONFIG=$RCLONE_CONFIG
             -e MONGO_URI="${{ secrets.MONGO_URI }}" \
             -e FILENAME="${{ secrets.FILENAME }}" \
             -e MONGODUMP_ARGS="${{ secrets.MONGODUMP_ARGS }}" \
